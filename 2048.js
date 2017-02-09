@@ -8,8 +8,6 @@ const load = function() {
     $('table').find('span').text('2')
 }
 
-load()
-
 // 从html中读出表格数字到数组
 const loadTable = function() {
     var array = []
@@ -34,13 +32,6 @@ const loadTable = function() {
     log('array', array)
     return array
 }
-
-const testArray = [
-    [2, 2, 2, 2],
-    [2, 2, 2, 0],
-    [2, 2, 0, 0],
-    [2, 0, 0, 0],
-]
 
 // 将数组赋值给html表格
 const saveTable = function(array) {
@@ -75,6 +66,11 @@ const rightPlus = function(array) {
 }
 
 // 单元格向右滑动相加
+// 1, 若遇到 0, 则跳过继续
+// 2, 若遇到数字, 则判断是否能相加
+// 3, 若能相加，则相加后，原单元格置 0，若不能相加，则将原单元格移至遇到的数字前一格
+//    并将原单元格置 0
+// 4，若滑动到底无数字，则将单元格移至最右端，原单元格置 0
 const rightPlusCell = function(array, i, j) {
     var cols = array[0].length
     var k = j + 1
@@ -97,10 +93,59 @@ const rightPlusCell = function(array, i, j) {
     }
 }
 
+// 向左滑动相加
+const leftPlus = function(array) {
+    var rows = array.length
+    var cols = array[0].length
+    for (let i = 0; i < rows; i++) {
+        for (let j = 1; j < cols; j++) {
+            if(array[i][j] != 0) {
+                leftPlusCell(array, i, j)
+            }
+        }
+    }
+    return array
+}
+
+// 单元格向左滑动相加
+// 1, 若遇到 0, 则跳过继续
+// 2, 若遇到数字, 则判断是否能相加
+// 3, 若能相加，则相加后，原单元格置 0，若不能相加，则将原单元格移至遇到的数字前一格
+//    并将原单元格置 0
+// 4，若滑动到底无数字，则将单元格移至最左端，原单元格置 0
+const leftPlusCell = function(array, i, j) {
+    var cols = array[0].length
+    var k = j - 1
+    while(k >= 0) {
+        if(array[i][k] == 0) {
+            k--
+        }else if(array[i][j] == array[i][k]) {
+            array[i][k] *= 2
+            array[i][j] = 0
+            return
+        }else {
+            array[i][k + 1] = array[i][j]
+            array[i][j] = 0
+            return
+        }
+    }
+    if(k <= 0) {
+        array[i][0] = array[i][j]
+        array[i][j] = 0
+    }
+}
+
+const testArray = [
+    [0, 2, 0, 2],
+    [2, 0, 2, 2],
+    [2, 2, 0, 2],
+    [2, 0, 2, 0],
+]
+
 var test = function() {
     saveTable(testArray)
     var array = loadTable()
-    rightPlus(array)
+    leftPlus(array)
     saveTable(array)
 }
 
