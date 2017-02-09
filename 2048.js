@@ -60,25 +60,47 @@ const saveTable = function(array) {
     }
 }
 
-// 向右相加
+// 向右滑动相加
 const rightPlus = function(array) {
     var rows = array.length
     var cols = array[0].length
     for (let i = 0; i < rows; i++) {
-        for (let j = cols - 1; j > 0; j--) {
-            if((array[i][j] == array[i][j - 1]) && (array[i][j] != 0)) {
-                array[i][j] += array[i][j - 1]
-                array[i][j - 1] = 0
-              }
+        for (let j = cols - 2; j >= 0; j--) {
+            if(array[i][j] != 0) {
+                rightPlusCell(array, i, j)
+            }
         }
     }
     return array
 }
 
+// 单元格向右滑动相加
+const rightPlusCell = function(array, i, j) {
+    var cols = array[0].length
+    var k = j + 1
+    while(k < cols) {
+        if(array[i][k] == 0) {
+            k++
+        }else if(array[i][j] == array[i][k]) {
+            array[i][k] *= 2
+            array[i][j] = 0
+            return
+        }else {
+            array[i][k - 1] = array[i][j]
+            array[i][j] = 0
+            return
+        }
+    }
+    if(k >= cols) {
+        array[i][cols - 1] = array[i][j]
+        array[i][j] = 0
+    }
+}
+
 var test = function() {
     saveTable(testArray)
     var array = loadTable()
-    // rightPlus(array)
+    rightPlus(array)
     saveTable(array)
 }
 
