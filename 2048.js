@@ -5,7 +5,7 @@ const log = function() {
 // 初始化html表格
 const load = function() {
     log('load')
-    $('table').find('span').text('1024')
+    $('table').find('span').text('2')
 }
 
 load()
@@ -21,7 +21,13 @@ const loadTable = function() {
         var arr = []
         for (let j = 0; j < cols; j++) {
             var index = i * cols + j
-            arr.push(spans[index].innerText)
+            var c = spans[index].innerText
+            if(c != '') {
+                var number = parseInt(spans[index].innerText)
+            }else {
+                var number = 0
+            }
+            arr.push(number)
         }
         array.push(arr)
     }
@@ -30,10 +36,10 @@ const loadTable = function() {
 }
 
 const testArray = [
-    [2, 4, 8, 16],
-    [32, 64, 128, 256],
-    [512, 1024, 2048, 4096],
-    [8192, 16384, 32768, 65536],
+    [2, 2, 2, 2],
+    [2, 2, 2, 0],
+    [2, 2, 0, 0],
+    [2, 0, 0, 0],
 ]
 
 // 将数组赋值给html表格
@@ -42,15 +48,38 @@ const saveTable = function(array) {
     var cols = array[0].length
     var spans = $('table').find('span')
     for (let i = 0; i < rows; i++) {
-        var arr = array[i]
+        // var arr = array[i]
         for (let j = 0; j < cols; j++) {
             var index = i * cols + j
-            spans[index].innerText = arr[j]
+            if(array[i][j] != 0){
+                spans[index].innerText = array[i][j]
+            }else {
+                spans[index].innerText = ''
+            }
         }
     }
 }
 
 // 向右相加
 const rightPlus = function(array) {
-
+    var rows = array.length
+    var cols = array[0].length
+    for (let i = 0; i < rows; i++) {
+        for (let j = cols - 1; j > 0; j--) {
+            if((array[i][j] == array[i][j - 1]) && (array[i][j] != 0)) {
+                array[i][j] += array[i][j - 1]
+                array[i][j - 1] = 0
+              }
+        }
+    }
+    return array
 }
+
+var test = function() {
+    saveTable(testArray)
+    var array = loadTable()
+    // rightPlus(array)
+    saveTable(array)
+}
+
+test()

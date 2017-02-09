@@ -67,6 +67,7 @@ tr {
 }
 td {
     height: 20vw;
+    width: 20vw;
     background-color: #cabeb1;
     border-radius: 10%;
 }
