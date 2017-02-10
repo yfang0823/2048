@@ -2,6 +2,30 @@ const log = function() {
     console.log.apply(console, arguments)
 }
 
+const handleRight = function() {
+    var array = loadTable()
+    rightPlus(array)
+    saveTable(array)
+}
+
+const handleLeft = function() {
+    var array = loadTable()
+    leftPlus(array)
+    saveTable(array)
+}
+
+const handleUp = function() {
+    var array = loadTable()
+    upPlus(array)
+    saveTable(array)
+}
+
+const handleDown = function() {
+    var array = loadTable()
+    downPlus(array)
+    saveTable(array)
+}
+
 // 向右滑动相加
 const rightPlus = function(array) {
     var rows = array.length
