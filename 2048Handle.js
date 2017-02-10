@@ -2,6 +2,8 @@ const log = function() {
     console.log.apply(console, arguments)
 }
 
+var score = 0
+
 const handleRight = function() {
     var array = loadTable()
     rightPlus(array)
@@ -53,6 +55,7 @@ const rightPlusCell = function(array, i, j) {
             k++
         }else if(array[i][j] == array[i][k]) {
             array[i][k] *= -2
+            score += array[i][j] * 2
             array[i][j] = 0
             return
         }else if(k - 1 != j){
@@ -96,6 +99,7 @@ const leftPlusCell = function(array, i, j) {
             k--
         }else if(array[i][j] == array[i][k]) {
             array[i][k] *= -2
+            score += array[i][j] * 2
             array[i][j] = 0
             return
         }else if(k + 1 != j){
@@ -139,6 +143,7 @@ const upPlusCell = function(array, i, j) {
             k--
         }else if(array[i][j] == array[k][j]) {
             array[k][j] *= -2
+            score += array[i][j] * 2
             array[i][j] = 0
             return
         }else if(k + 1 != i){
@@ -182,6 +187,7 @@ const downPlusCell = function(array, i, j) {
             k++
         }else if(array[i][j] == array[k][j]) {
             array[k][j] *= -2
+            score += array[i][j] * 2
             array[i][j] = 0
             return
         }else if(k - 1 != i){

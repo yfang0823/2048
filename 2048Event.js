@@ -20,6 +20,7 @@ $('table').on('touchend', function(event){
     // log('touchend', endX, endY)
     judgeDirection(startX, startY, endX, endY)
     generateNewCell()
+    updateScore()
 })
 
 const judgeDirection = function(startX, startY, endX, endY) {
@@ -68,4 +69,8 @@ var generateNewCell = function() {
             done = true
         }
     }
+}
+
+var updateScore = function() {
+    $('#id-score-now').text(score)
 }
