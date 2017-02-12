@@ -25,7 +25,7 @@ const loadTable = function() {
         }
         array.push(arr)
     }
-    log('array', array)
+    // log('array', array)
     return array
 }
 
