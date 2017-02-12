@@ -4,49 +4,58 @@ const log = function() {
 
 var score = 0
 
+// 根据滑动方向调用不同的相加函数
 const handleDirection = function(direction) {
     var d = direction
     var array = loadTable()
+    var changed = false
     if(d == 'right'){
-        handleRight(array)
+        changed = handleRight(array)
     }else if(d == 'left'){
-        handleLeft(array)
+        changed = handleLeft(array)
     }else if(d == 'down'){
-        handleDown(array)
+        changed = handleDown(array)
     }else if(d == 'up'){
-        handleUp(array)
+        changed = handleUp(array)
+    }else {
+        // 滑动方向错误
     }
     saveTable(array)
-    return true
+    return changed
 }
 
 const handleRight = function(array) {
-    rightPlus(array)
+    return rightPlus(array)
 }
 
 const handleLeft = function(array) {
-    leftPlus(array)
+    return leftPlus(array)
 }
 
 const handleUp = function(array) {
-    upPlus(array)
+    return upPlus(array)
 }
 
 const handleDown = function(array) {
-    downPlus(array)
+    return downPlus(array)
 }
 
 // 向右滑动相加
 const rightPlus = function(array) {
     var rows = array.length
     var cols = array[0].length
+    var changed = false
     for (let i = 0; i < rows; i++) {
         for (let j = cols - 2; j >= 0; j--) {
             if(array[i][j] != 0) {
                 rightPlusCell(array, i, j)
+                if(array[i][j] == 0) {
+                    result = true
+                }
             }
         }
     }
+    return changed
 }
 
 // 单元格向右滑动相加
@@ -84,13 +93,18 @@ const rightPlusCell = function(array, i, j) {
 const leftPlus = function(array) {
     var rows = array.length
     var cols = array[0].length
+    var changed = false
     for (let i = 0; i < rows; i++) {
         for (let j = 1; j < cols; j++) {
             if(array[i][j] != 0) {
                 leftPlusCell(array, i, j)
+                if(array[i][j] == 0) {
+                    changed = true
+                }
             }
         }
     }
+    return changed
 }
 
 // 单元格向左滑动相加
@@ -128,13 +142,18 @@ const leftPlusCell = function(array, i, j) {
 const upPlus = function(array) {
     var rows = array.length
     var cols = array[0].length
+    var changed = false
     for (let i = 1; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             if(array[i][j] != 0) {
                 upPlusCell(array, i, j)
+                if(array[i][j] == 0) {
+                    changed = true
+                }
             }
         }
     }
+    return changed
 }
 
 // 单元格向上滑动相加
@@ -172,13 +191,18 @@ const upPlusCell = function(array, i, j) {
 const downPlus = function(array) {
     var rows = array.length
     var cols = array[0].length
+    var changed = false
     for (let i = rows - 2; i >= 0; i--) {
         for (let j = 0; j < cols; j++) {
             if(array[i][j] != 0) {
                 downPlusCell(array, i, j)
+                if(array[i][j] == 0) {
+                    changed = true
+                }
             }
         }
     }
+    return changed
 }
 
 // 单元格向下滑动相加

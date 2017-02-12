@@ -19,18 +19,19 @@ $('table').on('touchend', function(event){
     endY = event.changedTouches[0].pageY
     // log('touchend', endX, endY)
     var d = judgeDirection(startX, startY, endX, endY)
-    var change = false
+    var changed = false
     if(d != '') {
-        change = handleDirection(d)
+        changed = handleDirection(d)
     }
-    log('table changed ? ', change)
-    if(change == true) {
+    // log('table changed ? ', changed)
+    if(changed == true) {
         generateNewCell()
         updateScore()
         var success = judgeSuccess()
+        // log('success ? ', success)
         var full = judgeFull()
-        if(success == false && full == true) {
-            judgeEnd()
+        if(full == true) {
+            judgeEnd(success)
         }
     }
 })
@@ -98,11 +99,16 @@ const updateScore = function() {
     $('#id-score-now').text(score)
 }
 
+// 判断是否赢了
 const judgeSuccess = function() {
     var spans = $('table').find('span')
     for (var i = 0; i < spans.length; i++) {
-        if(spans[i].innerText == '2048') {
-            $('success').text('2048！，可以了')
+        var text = spans[i].innerText
+        if(text == '2048') {
+            $('.success').text('2048！，可以了')
+            return true
+        }else if(text == '4096') {
+            $('.success').text('4096！，上天了')
             return true
         }
     }
@@ -149,7 +155,7 @@ const judgeCell = function(array, i, j) {
 }
 
 // 判断游戏是否结束
-const judgeEnd = function() {
+const judgeEnd = function(success) {
     // log('GameJudge')
     var arr = loadTable()
     var rows = arr.length
@@ -161,6 +167,10 @@ const judgeEnd = function() {
             }
         }
     }
-    $('.fail').text('小朋友你输了')
+    if(success == true) {
+        $('.success').text('2048！然而游戏结束了')
+    }else {
+        $('.fail').text('小朋友你输了')
+    }  
     return false
 }
