@@ -38,8 +38,13 @@ const saveTable = function(array) {
         // var arr = array[i]
         for (let j = 0; j < cols; j++) {
             var index = i * cols + j
+            spans[index].classList = ''
             if(array[i][j] != 0){
-                spans[index].innerText = Math.abs(array[i][j])
+                var num = Math.abs(array[i][j])
+                spans[index].innerText = num
+                var className = 'n' + num
+                spans[index].classList.add(className)
+                // log('span class ', className)
             }else {
                 spans[index].innerText = ''
             }

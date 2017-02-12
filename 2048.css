@@ -71,8 +71,8 @@
     height: 60%;
 }
 table {
-    width: 80vw;
-    height: 80vw;
+    width: 90vw;
+    height: 90vw;
     margin: auto;
     border-style: solid;
     border-width: 2px;
@@ -93,4 +93,5 @@ td > span {
     display: inline-block;
     height: 100%;
     width: 100%;
+    line-height: 20vw;
 }

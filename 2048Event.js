@@ -88,6 +88,8 @@ const generateNewCell = function() {
         // log('generating...', pos, spans[pos].innerText)
         if(spans[pos].innerText == '') {
             spans[pos].innerText = num
+            var className = 'n' + num
+            spans[pos].classList.add(className)
             done = true
         }
     }
@@ -171,6 +173,6 @@ const judgeEnd = function(success) {
         $('.success').text('2048！然而游戏结束了')
     }else {
         $('.fail').text('小朋友你输了')
-    }  
+    }
     return false
 }
