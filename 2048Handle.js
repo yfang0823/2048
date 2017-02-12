@@ -4,28 +4,36 @@ const log = function() {
 
 var score = 0
 
-const handleRight = function() {
+const handleDirection = function(direction) {
+    var d = direction
     var array = loadTable()
+    if(d == 'right'){
+        handleRight(array)
+    }else if(d == 'left'){
+        handleLeft(array)
+    }else if(d == 'down'){
+        handleDown(array)
+    }else if(d == 'up'){
+        handleUp(array)
+    }
+    saveTable(array)
+    return true
+}
+
+const handleRight = function(array) {
     rightPlus(array)
-    saveTable(array)
 }
 
-const handleLeft = function() {
-    var array = loadTable()
+const handleLeft = function(array) {
     leftPlus(array)
-    saveTable(array)
 }
 
-const handleUp = function() {
-    var array = loadTable()
+const handleUp = function(array) {
     upPlus(array)
-    saveTable(array)
 }
 
-const handleDown = function() {
-    var array = loadTable()
+const handleDown = function(array) {
     downPlus(array)
-    saveTable(array)
 }
 
 // 向右滑动相加
