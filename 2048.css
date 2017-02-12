@@ -69,7 +69,11 @@
 }
 .body {
     height: 60%;
+}
+* {
+    box-sizing: border-box;
     user-select: none;
+    -webkit-user-select: none;
 }
 table {
     width: 90vw;
