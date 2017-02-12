@@ -6,3 +6,25 @@ const gameInit = function() {
 }
 
 gameInit()
+
+const clearTable = function() {
+    var zeroArr = [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+    ]
+    saveTable(zeroArr)
+}
+
+const clearText = function() {
+    $('#id-score-now').text('0')
+    $('.success').text('')
+    $('.fail').text('')
+}
+
+const newGame = function() {
+    clearTable()
+    clearText()
+    gameInit()
+}
