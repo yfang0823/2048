@@ -25,7 +25,6 @@ const loadTable = function() {
         }
         array.push(arr)
     }
-    // log('array', array)
     return array
 }
 
@@ -35,16 +34,16 @@ const saveTable = function(array) {
     var cols = array[0].length
     var spans = $('table').find('span')
     for (let i = 0; i < rows; i++) {
-        // var arr = array[i]
         for (let j = 0; j < cols; j++) {
             var index = i * cols + j
+            // 清空字体class
             spans[index].classList = ''
             if(array[i][j] != 0){
                 var num = Math.abs(array[i][j])
                 spans[index].innerText = num
                 var className = 'n' + num
+                // 添加字体class
                 spans[index].classList.add(className)
-                // log('span class ', className)
             }else {
                 spans[index].innerText = ''
             }

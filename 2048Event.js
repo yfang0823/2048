@@ -40,7 +40,6 @@ $('table').on('touchend', function(event){
 const judgeDirection = function(startX, startY, endX, endY) {
     var dx = endX - startX
     var dy = endY - startY
-    // log('dx ', dx, 'dy', dy)
     if(Math.abs(dx) >= Math.abs(dy)) {
         if(dx > 30) {
             return 'right'
@@ -85,10 +84,10 @@ const generateNewCell = function() {
     var spans = $('table').find('span')
     while(!done) {
         var pos = randomCell(size)
-        // log('generating...', pos, spans[pos].innerText)
         if(spans[pos].innerText == '') {
             spans[pos].innerText = num
             var className = 'n' + num
+            // 添加字体class
             spans[pos].classList.add(className)
             done = true
         }
