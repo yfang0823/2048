@@ -50,7 +50,7 @@ const rightPlus = function(array) {
             if(array[i][j] != 0) {
                 rightPlusCell(array, i, j)
                 if(array[i][j] == 0) {
-                    result = true
+                    changed = true
                 }
             }
         }
@@ -104,6 +104,7 @@ const leftPlus = function(array) {
             }
         }
     }
+    log('left change ? ', changed)
     return changed
 }
 
