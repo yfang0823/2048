@@ -28,3 +28,5 @@ const newGame = function() {
     clearText()
     gameInit()
 }
+
+$('.newGame').on('touchend', newGame)
