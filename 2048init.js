@@ -5,7 +5,21 @@ const gameInit = function() {
     }
 }
 
-gameInit()
+const loadGame = function() {
+    var game = JSON.parse(localStorage.game)
+    var arr = game.table
+    score = parseInt(game.score)
+    saveTable(arr)
+    updateScore()
+}
+
+const gameBegin = function() {
+    if(localStorage.game != undefined) {
+        loadGame()
+    }else {
+        gameInit()
+    }
+}
 
 const clearTable = function() {
     var zeroArr = [
@@ -32,6 +46,9 @@ const newGame = function() {
     clearText()
     clearScore()
     gameInit()
+    saveGame()
 }
 
 $('.newGame').on('touchend', newGame)
+
+gameBegin()

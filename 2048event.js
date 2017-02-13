@@ -3,6 +3,18 @@ var startY
 var endX
 var endY
 
+var data = {
+    "table": [],
+    "score": '',
+}
+
+const saveGame = function() {
+    var arr = loadTable()
+    data.table = arr
+    data.score = String(score)
+    localStorage.game = JSON.stringify(data)
+}
+
 $('table').on('touchstart', function(event){
     startX = event.touches[0].pageX
     startY = event.touches[0].pageY
@@ -27,6 +39,7 @@ $('table').on('touchend', function(event){
     if(changed == true) {
         generateNewCell()
         updateScore()
+        saveGame()
         var success = judgeSuccess()
         // log('success ? ', success)
         var full = judgeFull()
@@ -97,7 +110,7 @@ const generateNewCell = function() {
 
 // 更新分数
 const updateScore = function() {
-    $('#id-score-now').text(score)
+    $('#id-score-now').text(String(score))
 }
 
 // 判断是否赢了

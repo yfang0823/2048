@@ -21,6 +21,9 @@ const handleDirection = function(direction) {
         // 滑动方向错误
     }
     saveTable(array)
+    if(changed == true) {
+        saveGame()
+    }
     return changed
 }
 
