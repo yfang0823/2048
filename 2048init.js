@@ -18,14 +18,19 @@ const clearTable = function() {
 }
 
 const clearText = function() {
-    $('#id-score-now').text('0')
     $('.success').text('')
     $('.fail').text('')
+}
+
+const clearScore = function() {
+    $('#id-score-now').text('0')
+    score = 0
 }
 
 const newGame = function() {
     clearTable()
     clearText()
+    clearScore()
     gameInit()
 }
 
