@@ -6,12 +6,14 @@ var endY
 var data = {
     "table": [],
     "score": '',
+    "record": '',
 }
 
 const saveGame = function() {
     var arr = loadTable()
     data.table = arr
     data.score = String(score)
+    data.record = String(record)
     localStorage.game = JSON.stringify(data)
 }
 
@@ -111,6 +113,7 @@ const generateNewCell = function() {
 // 更新分数
 const updateScore = function() {
     $('#id-score-now').text(String(score))
+    $('#id-score-record').text(String(record))
 }
 
 // 判断是否赢了

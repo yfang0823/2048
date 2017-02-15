@@ -3,6 +3,7 @@ const log = function() {
 }
 
 var score = 0
+var record = 0
 
 // 根据滑动方向调用不同的相加函数
 const handleDirection = function(direction) {
@@ -21,6 +22,9 @@ const handleDirection = function(direction) {
         // 滑动方向错误
     }
     saveTable(array)
+    if(score > record) {
+        record = score
+    }
     if(changed == true) {
         saveGame()
     }
