@@ -49,6 +49,6 @@ const newGame = function() {
     saveGame()
 }
 
-$('.newGame').on('touchend', newGame)
+$('.new').on('touchend', newGame)
 
 gameBegin()

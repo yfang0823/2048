@@ -30,7 +30,7 @@
 }
 .features {
     display: block;
-    margin-left: 40vw;
+    margin-left: 36vw;
     height: 25vw;
     /*border-radius: 5%;*/
     /*margin-left: 10vw;*/
@@ -53,7 +53,11 @@
 .score-content {
     display: block;
 }
-.newGame {
+.record {
+    display: inline-block;
+    margin-left: 2vw;
+}
+.gameFeature {
     background-color: #f5965f;
     margin-top: 3vw;
     /*margin-left: 15vw;*/
@@ -62,10 +66,13 @@
     border-radius: 5%;
     display: inline-block;
 }
-.gameTitle {
+.featureTitle {
     margin-top: 0.2rem;
     font-size: 1.5rem;
     display: block;
+}
+.new {
+    margin-left: 2vw;
 }
 .body {
     height: 60%;
