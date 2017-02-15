@@ -8,16 +8,14 @@ const gameInit = function() {
 const loadGame = function() {
     var game = JSON.parse(localStorage.game)
     var arr = game.table
-    if(game.score == '') {
+    score = parseInt(game.score)
+    if(score == NaN) {
         score = 0
-    }else {
-        score = parseInt(game.score)
     }
-    if(game.record == '') {
+    record = parseInt(game.record)
+    if(record == NaN) {
         record = 0
-    }else {
-        record = parseInt(game.record)
-    }    
+    }
     saveTable(arr)
     updateScore()
 }
