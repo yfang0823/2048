@@ -17,7 +17,7 @@ const loadGame = function() {
         record = 0
     }else {
         record = parseInt(game.record)
-    }  
+    }
     saveTable(arr)
     updateScore()
 }
@@ -58,6 +58,19 @@ const newGame = function() {
     saveGame()
 }
 
+const cheatGame = function() {
+    if(paths.length > 0) {
+        var last = paths.length - 1
+        var lastTable = paths[last]
+        log('cheat! ', lastTable)
+        saveTable(lastTable)
+    }else {
+        log('no cheat path! ')
+        // 切换class，灰显悔棋按钮
+    }
+}
+
 $('.new').on('touchend', newGame)
+$('.cheat').on('touchend', cheatGame)
 
 gameBegin()

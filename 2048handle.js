@@ -4,11 +4,19 @@ const log = function() {
 
 var score = 0
 var record = 0
+var paths = []
+
+const copyArray = function(array) {
+    var arr = JSON.stringify(array)
+    return JSON.parse(arr)
+}
 
 // 根据滑动方向调用不同的相加函数
 const handleDirection = function(direction) {
     var d = direction
     var array = loadTable()
+    var arr = copyArray(array)
+    paths.push(arr)
     var changed = false
     if(d == 'right'){
         changed = handleRight(array)
@@ -21,11 +29,12 @@ const handleDirection = function(direction) {
     }else {
         // 滑动方向错误
     }
-    saveTable(array)
+
     if(score > record) {
         record = score
     }
     if(changed == true) {
+        saveTable(array)
         saveGame()
     }
     return changed
