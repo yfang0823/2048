@@ -23,6 +23,7 @@ const loadGame = function() {
 }
 
 const gameBegin = function() {
+    $('.cheat').addClass('disabled')
     if(localStorage.game != undefined) {
         loadGame()
     }else {
@@ -67,8 +68,10 @@ const cheatGame = function() {
         saveTable(lastTable)
     }else {
         log('no cheat path! ')
-        $('.cheat').addClass('disabled')
         // 切换class，灰显悔棋按钮
+    }
+    if(paths.length == 0) {
+        $('.cheat').addClass('disabled')
     }
 }
 
