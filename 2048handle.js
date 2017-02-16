@@ -17,6 +17,7 @@ const handleDirection = function(direction) {
     var array = loadTable()
     var arr = copyArray(array)
     paths.push(arr)
+    $('.cheat').removeClass('disabled')
     var changed = false
     if(d == 'right'){
         changed = handleRight(array)
@@ -29,7 +30,6 @@ const handleDirection = function(direction) {
     }else {
         // 滑动方向错误
     }
-
     if(score > record) {
         record = score
     }

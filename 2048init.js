@@ -62,10 +62,12 @@ const cheatGame = function() {
     if(paths.length > 0) {
         var last = paths.length - 1
         var lastTable = paths[last]
-        log('cheat! ', lastTable)
+        paths.splice(last, 1)
+        log('cheat! ', paths.length, lastTable)
         saveTable(lastTable)
     }else {
         log('no cheat path! ')
+        $('.cheat').addClass('disabled')
         // 切换class，灰显悔棋按钮
     }
 }

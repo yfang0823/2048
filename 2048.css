@@ -74,6 +74,9 @@
 .new {
     margin-left: 2vw;
 }
+.disabled {
+    background-color: rgba(158, 158, 158, 0.38);
+}
 .body {
     height: 60%;
 }
