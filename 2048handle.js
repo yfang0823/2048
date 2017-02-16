@@ -16,8 +16,7 @@ const handleDirection = function(direction) {
     var d = direction
     var array = loadTable()
     var arr = copyArray(array)
-    paths.push(arr)
-    $('.cheat').removeClass('disabled')
+    var s = score
     var changed = false
     if(d == 'right'){
         changed = handleRight(array)
@@ -36,6 +35,12 @@ const handleDirection = function(direction) {
     if(changed == true) {
         saveTable(array)
         saveGame()
+        var pre = {
+            "table": arr,
+            "score": s,
+        }
+        paths.push(pre)
+        $('.cheat').removeClass('disabled')
     }
     return changed
 }

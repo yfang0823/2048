@@ -51,27 +51,36 @@ const clearScore = function() {
     score = 0
 }
 
+const clearPaths = function() {
+    paths = []
+    $('.cheat').addClass('disabled')
+}
+
 const newGame = function() {
     clearTable()
     clearText()
     clearScore()
+    clearPaths()
     gameInit()
     saveGame()
 }
 
 const cheatGame = function() {
-    if(paths.length > 0) {
-        var last = paths.length - 1
-        var lastTable = paths[last]
+    var length = paths.length
+    if(length > 0) {
+        var last = length - 1
+        var lastTable = paths[last].table
+        var lastScore = paths[last].score
+        score = parseInt(lastScore)
         paths.splice(last, 1)
-        log('cheat! ', paths.length, lastTable)
+        log('cheat! ', paths.length, lastTable, lastScore)
         saveTable(lastTable)
+        updateScore()
+        if(paths.length == 0) {
+            $('.cheat').addClass('disabled')
+        }
     }else {
         log('no cheat path! ')
-        // 切换class，灰显悔棋按钮
-    }
-    if(paths.length == 0) {
-        $('.cheat').addClass('disabled')
     }
 }
 
