@@ -76,6 +76,7 @@ const cheatGame = function() {
         log('cheat! ', paths.length, lastTable, lastScore)
         saveTable(lastTable)
         updateScore()
+        saveGame()
         if(paths.length == 0) {
             $('.cheat').addClass('disabled')
         }
