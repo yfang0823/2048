@@ -35,18 +35,33 @@ const saveTable = function(array) {
     var spans = $('table').find('span')
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
+            var t = array[i][j]
             var index = i * cols + j
             // 清空字体class
             spans[index].classList = ''
-            if(array[i][j] != 0){
-                var num = Math.abs(array[i][j])
+            if(t != 0){
+                var num = Math.abs(t)
                 spans[index].innerText = num
                 var className = 'n' + num
                 // 添加字体class
                 spans[index].classList.add(className)
+                if(t < 0) {
+                    console.log('before merge: ', t, spans[index].classList)
+                    var animation = 'merge-one'
+                    spans[index].classList.add(animation)
+                    console.log('after merge: ', t, spans[index].classList)
+                }
             }else {
                 spans[index].innerText = ''
             }
         }
     }
 }
+
+$('table').find('span').on('animationend', function(event){
+    log('animation end')
+    var s = event.target
+    var num = s.innerHTML
+    var className = 'n' + num
+    s.classList = className
+})

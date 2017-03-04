@@ -110,3 +110,42 @@ td > span {
     width: 100%;
     line-height: 20vw;
 }
+
+/*
+  相同数字合并动画
+*/
+.merge-one {
+    animation: suo 0.5s;
+    -webkit-animation: suo 0.5s;
+}
+
+@keyframes suo {
+    from {
+        transform: scale(2);
+        -webkit-transform: scale(2);
+    }
+    to {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+    }
+}
+
+/*
+  新添加的元素添加放大效果
+*/
+.new-one {
+    transform: scale(0);
+    animation: shine 0.5s 0.25s;
+    -webkit-animation: shine 0.5s 0.25s;
+}
+
+@keyframes shine {
+    from {
+        transform: scale(0.2);
+        -webkit-transform: scale(0.2);
+    }
+    to {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+    }
+}

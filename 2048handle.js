@@ -125,7 +125,7 @@ const leftPlus = function(array) {
             }
         }
     }
-    log('left change ? ', changed)
+    // log('left change ? ', changed)
     return changed
 }
 

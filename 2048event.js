@@ -94,7 +94,7 @@ const generateNewCell = function() {
     var done = false
     var length = 4
     var size = length * length
-    var array = [2, 4]
+    var array = [2, 2, 2, 4]
     var num = randomNum(array)
     var spans = $('table').find('span')
     while(!done) {
@@ -104,10 +104,12 @@ const generateNewCell = function() {
             var className = 'n' + num
             // 添加字体class
             spans[pos].classList.add(className)
+            var newClass = 'new-one'
+            spans[pos].classList.add(newClass)
             done = true
         }
     }
-    log('generated', pos, spans[pos].innerText)
+    // log('generated', pos, spans[pos].innerText)
 }
 
 // 更新分数

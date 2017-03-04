@@ -73,7 +73,7 @@ const cheatGame = function() {
         var lastScore = paths[last].score
         score = parseInt(lastScore)
         paths.splice(last, 1)
-        log('cheat! ', paths.length, lastTable, lastScore)
+        // log('cheat! ', paths.length, lastTable, lastScore)
         saveTable(lastTable)
         updateScore()
         saveGame()
@@ -81,7 +81,7 @@ const cheatGame = function() {
             $('.cheat').addClass('disabled')
         }
     }else {
-        log('no cheat path! ')
+        // log('no cheat path! ')
     }
 }
 
