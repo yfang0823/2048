@@ -238,5 +238,5 @@ var plusTable = {
 const handlePlus = function(array, direction) {
     var plusFunc = plusTable[direction]
     var changed = plusFunc(array)
-    return changed
+    return changed 
 }
