@@ -25,7 +25,7 @@ const loadGame = function() {
 const __gameBegin = function() {
     $('.cheat').addClass('disabled')
     if(document.documentElement.clientHeight <= 568) {
-        $('html').addClass('smallScreen')
+        //$('html').addClass('smallScreen')
     }
     if(localStorage.game != undefined) {
         loadGame()
