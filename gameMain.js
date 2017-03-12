@@ -212,5 +212,5 @@ const cheatGame = function() {
         }
     }else {
         // log('no cheat path! ')
-    }
+    } 
 }
