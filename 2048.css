@@ -149,6 +149,6 @@ td > span {
     }
     to {
         transform: scale(1);
-        -webkit-transform: scale(1);
+        -webkit-transform: scale(1); 
     }
 }
