@@ -35,4 +35,4 @@ const __gameBegin = function() {
     }
 }
 
-__gameBegin()
+__gameBegin() 
