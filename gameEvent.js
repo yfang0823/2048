@@ -1,5 +1,5 @@
 /*
-  事件绑定
+  事件绑定 
 */
 var startX
 var startY
