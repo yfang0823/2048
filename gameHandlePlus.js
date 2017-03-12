@@ -1,7 +1,3 @@
-const log = function() {
-    console.log.apply(console, arguments)
-}
-
 var score = 0
 var record = 0
 var paths = []
@@ -13,52 +9,24 @@ const copyArray = function(array) {
 
 // 根据滑动方向调用不同的相加函数
 const handleDirection = function(direction) {
-    var d = direction
     var array = loadTable()
     var arr = copyArray(array)
-    var s = score
-    var changed = false
-    if(d == 'right'){
-        changed = handleRight(array)
-    }else if(d == 'left'){
-        changed = handleLeft(array)
-    }else if(d == 'down'){
-        changed = handleDown(array)
-    }else if(d == 'up'){
-        changed = handleUp(array)
-    }else {
-        // 滑动方向错误
+    var prev = {
+        "table": arr,
+        "score": score,
     }
+    var changed = false
+    var changed = handlePlus(array, direction)
     if(score > record) {
         record = score
     }
     if(changed == true) {
         saveTable(array)
         saveGame()
-        var pre = {
-            "table": arr,
-            "score": s,
-        }
-        paths.push(pre)
+        paths.push(prev)
         $('.cheat').removeClass('disabled')
     }
     return changed
-}
-
-const handleRight = function(array) {
-    return rightPlus(array)
-}
-
-const handleLeft = function(array) {
-    return leftPlus(array)
-}
-
-const handleUp = function(array) {
-    return upPlus(array)
-}
-
-const handleDown = function(array) {
-    return downPlus(array)
 }
 
 // 向右滑动相加
@@ -256,4 +224,19 @@ const downPlusCell = function(array, i, j) {
         array[rows - 1][j] = array[i][j]
         array[i][j] = 0
     }
+}
+
+// 滑动相加函数集合
+var plusTable = {
+    'right': rightPlus,
+    'left': leftPlus,
+    'up': upPlus,
+    'down': downPlus
+}
+
+// 处理滑动相加合并
+const handlePlus = function(array, direction) {
+    var plusFunc = plusTable[direction]
+    var changed = plusFunc(array)
+    return changed
 }

@@ -1,55 +1,6 @@
-var startX
-var startY
-var endX
-var endY
-
-var data = {
-    "table": [],
-    "score": '',
-    "record": '',
-}
-
-const saveGame = function() {
-    var arr = loadTable()
-    data.table = arr
-    data.score = String(score)
-    data.record = String(record)
-    localStorage.game = JSON.stringify(data)
-}
-
-$('table').on('touchstart', function(event){
-    startX = event.touches[0].pageX
-    startY = event.touches[0].pageY
-    // log('touchstart', startX, startY)
-})
-
-$('table').on('touchmove', function(event){
-    // 禁止屏幕滚动
-    event.preventDefault()
-})
-
-$('table').on('touchend', function(event){
-    endX = event.changedTouches[0].pageX
-    endY = event.changedTouches[0].pageY
-    // log('touchend', endX, endY)
-    var d = judgeDirection(startX, startY, endX, endY)
-    var changed = false
-    if(d != '') {
-        changed = handleDirection(d)
-    }
-    // log('table changed ? ', changed)
-    if(changed == true) {
-        generateNewCell()
-        updateScore()
-        saveGame()
-        var success = judgeSuccess()
-        // log('success ? ', success)
-        var full = judgeFull()
-        if(full == true) {
-            judgeEnd(success)
-        }
-    }
-})
+/*
+  游戏主控
+*/
 
 // 判断触屏滑动方向
 const judgeDirection = function(startX, startY, endX, endY) {
@@ -94,7 +45,7 @@ const generateNewCell = function() {
     var done = false
     var length = 4
     var size = length * length
-    var array = [2, 2, 2, 4]
+    var array = [2, 2, 2, 2, 4]
     var num = randomNum(array)
     var spans = $('table').find('span')
     while(!done) {
@@ -192,4 +143,74 @@ const judgeEnd = function(success) {
         $('.fail').text('小朋友你输了')
     }
     return false
+}
+
+const clearTable = function() {
+    var zeroArr = [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+    ]
+    saveTable(zeroArr)
+}
+
+const clearText = function() {
+    $('.success').text('')
+    $('.fail').text('')
+}
+
+const clearScore = function() {
+    $('#id-score-now').text('0')
+    score = 0
+}
+
+const clearPaths = function() {
+    paths = []
+    $('.cheat').addClass('disabled')
+}
+
+// localStorage缓存数据结构
+var data = {
+    "table": [],
+    "score": '',
+    "record": '',
+}
+
+// 保存游戏
+const saveGame = function() {
+    var arr = loadTable()
+    data.table = arr
+    data.score = String(score)
+    data.record = String(record)
+    localStorage.game = JSON.stringify(data)
+}
+
+const newGame = function() {
+    clearTable()
+    clearText()
+    clearScore()
+    clearPaths()
+    gameInit()
+    saveGame()
+}
+
+const cheatGame = function() {
+    var length = paths.length
+    if(length > 0) {
+        var last = length - 1
+        var lastTable = paths[last].table
+        var lastScore = paths[last].score
+        score = parseInt(lastScore)
+        paths.splice(last, 1)
+        // log('cheat! ', paths.length, lastTable, lastScore)
+        saveTable(lastTable)
+        updateScore()
+        saveGame()
+        if(paths.length == 0) {
+            $('.cheat').addClass('disabled')
+        }
+    }else {
+        // log('no cheat path! ')
+    }
 }

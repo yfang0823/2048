@@ -1,7 +1,5 @@
-// 初始化html表格
-const load = function() {
-    log('load')
-    $('table').find('span').text('2')
+const log = function() {
+    console.log.apply(console, arguments)
 }
 
 // 从html中读出表格数字到数组
@@ -57,11 +55,3 @@ const saveTable = function(array) {
         }
     }
 }
-
-$('table').find('span').on('animationend', function(event){
-    log('animation end')
-    var s = event.target
-    var num = s.innerHTML
-    var className = 'n' + num
-    s.classList = className
-})
